@@ -1,5 +1,5 @@
 # db-doc-gen
-数据库文档生成    
+在项目中写文档很痛苦怎么办？答案是它：数据库文档生成    
 
 ## TODO 
 - [x] MySQL/MariaDB
