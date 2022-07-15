@@ -1,8 +1,9 @@
 # db-doc-gen
 数据库文档生成    
 
-## TODO
+## TODO 
 - [x] MySQL/MariaDB
+- [ ] 结构导出为SQL
 
 ## HOW TO INSTALL
 ```shell
