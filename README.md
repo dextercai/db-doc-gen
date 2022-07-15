@@ -1,6 +1,8 @@
 # db-doc-gen
 数据库文档生成    
-支持的数据库类型：MySQL/MariaDB
+
+## TODO
+- [x] MySQL/MariaDB
 
 ## HOW TO INSTALL
 ```shell
