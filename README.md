@@ -1,6 +1,11 @@
 # db-doc-gen
 数据库文档生成
 
+## HOW TO INSTALL
+```shell
+go install github.com/dextercai/db-doc-gen
+```
+
 ## HOW TO USE
 ```
 github.com/dextercai/db-doc-gen (unknown)
