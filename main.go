@@ -15,13 +15,13 @@ import (
 var dbConfig model.DbConfig
 
 func main() {
+
 	fmt.Printf("github.com/dextercai/db-doc-gen (%s)\n", define.VERSION)
 
 	dbConfig = model.DbConfig{
 		DbType:   flag.String("db-type", "mysql", "数据库类型：mysql"),
 		DocType:  flag.String("doc-type", "online", "文档生成类型：online、offline"),
 		DocServe: flag.String("doc-serve", ":8080", "在线文档服务地址"),
-
 		Host:     flag.String("host", "127.0.0.1", "数据库地址"),
 		Port:     flag.Int("port", 3306, "数据库端口"),
 		User:     flag.String("username", "admin", "数据库用户名"),
@@ -30,6 +30,8 @@ func main() {
 	}
 
 	flag.Parse()
+
+	// 数据库文档生成配置
 
 	fmt.Printf("解析到配置信息： \n")
 	fmt.Printf("%s\t%s\n", "数据库类型", *dbConfig.DbType)

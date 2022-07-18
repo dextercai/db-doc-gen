@@ -41,4 +41,10 @@ type Table struct {
 	TableComment string
 	ColList      []Column
 	IdxList      []Index
+	Ddl          TableCreateSql
+}
+
+type TableCreateSql struct {
+	TableName string
+	SqlLine   string
 }

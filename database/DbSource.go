@@ -72,12 +72,9 @@ func (this DbSource) GetTableInfo() []model.Table {
 		tables = append(tables, table)
 	}
 	for i := range tables {
-		columns := this.getColumnInfo(tables[i].TableName)
-		tables[i].ColList = columns
-	}
-	for i := range tables {
-		columns := this.getIndexInfo(tables[i].TableName)
-		tables[i].IdxList = columns
+		tables[i].ColList = this.getColumnInfo(tables[i].TableName)
+		tables[i].IdxList = this.getIndexInfo(tables[i].TableName)
+		tables[i].Ddl = this.getTableCreateSqlInfo(tables[i].TableName)
 	}
 	return tables
 }
@@ -142,11 +139,20 @@ func (this *DbSource) getIndexSQL(tableName string) string {
 			where table_schema = '%s' and table_name = '%s'
 		`, *this.Config.Database, tableName)
 	}
-
 	return sqlLine
 }
 
-func (this DbSource) getIndexInfo(tableName string) []model.Index {
+func (this *DbSource) getTableCreateSql(tableName string) string {
+	var sqlLine string
+	if *this.Config.DbType == "mysql" {
+		sqlLine = fmt.Sprintf(`
+			SHOW CREATE TABLE %s.%s
+		`, *this.Config.Database, tableName)
+	}
+	return sqlLine
+}
+
+func (this *DbSource) getIndexInfo(tableName string) []model.Index {
 	idxs := make([]model.Index, 0)
 	rows, err := this.DB.Query(this.getIndexSQL(tableName))
 	if err != nil {
@@ -160,4 +166,15 @@ func (this DbSource) getIndexInfo(tableName string) []model.Index {
 	return idxs
 }
 
-//
+func (this *DbSource) getTableCreateSqlInfo(tableName string) model.TableCreateSql {
+	createSql := model.TableCreateSql{}
+	rows, err := this.DB.Query(this.getTableCreateSql(tableName))
+	if err != nil {
+		fmt.Println(err)
+	}
+	// 期望只有一行
+	for rows.Next() {
+		rows.Scan(&createSql.TableName, &createSql.SqlLine)
+	}
+	return createSql
+}

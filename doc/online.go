@@ -25,18 +25,18 @@ func CreateOnlineDoc(docPath string, dbInfo model.DbInfo, tables []model.Table, 
 		sidebar = append(sidebar, fmt.Sprintf("* [%s(%s)](%s.md)", tables[i].TableName, tables[i].TableComment, tables[i].TableName))
 
 		var tableMd []string
-		tableMd = append(tableMd, "## 列定义")
+		tableMd = append(tableMd, "## 字段定义")
 		tableMd = append(tableMd, genTableCol(tables[i].ColList)...)
 		tableStr := strings.Join(tableMd, "\r\n")
 
 		var tableIdx []string
-		tableIdx = append(tableIdx, "## 索引信息")
+		tableIdx = append(tableIdx, "## 索引定义")
 		tableIdx = append(tableIdx, genTableIdx(tables[i].IdxList)...)
 		tableIdxStr := strings.Join(tableIdx, "\r\n")
 
 		var tableSql []string
-		tableSql = append(tableSql, "## 数据库定义SQL")
-		tableSql = append(tableSql, genTableSqlArea()...)
+		tableSql = append(tableSql, "## DDL")
+		tableSql = append(tableSql, genTableSqlArea(tables[i].Ddl)...)
 		tableSqlStr := strings.Join(tableSql, "\r\n")
 
 		pageContent := fmt.Sprintf("# %s(%s)\r\n", tables[i].TableName, tables[i].TableComment) +

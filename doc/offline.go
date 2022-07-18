@@ -42,16 +42,16 @@ func CreateOfflineDoc(docPath string, dbInfo model.DbInfo, tables []model.Table)
 	for i := range tables {
 		docMdArr = append(docMdArr, fmt.Sprintf("#### %s(%s)", tables[i].TableName, tables[i].TableComment))
 
-		docMdArr = append(docMdArr, "##### 列定义")
+		docMdArr = append(docMdArr, "##### 字段定义")
 		docMdArr = append(docMdArr, genTableCol(tables[i].ColList)...)
 		docMdArr = append(docMdArr, "")
 
-		docMdArr = append(docMdArr, "##### 索引信息")
+		docMdArr = append(docMdArr, "##### 索引定义")
 		docMdArr = append(docMdArr, genTableIdx(tables[i].IdxList)...)
 		docMdArr = append(docMdArr, "")
 
-		docMdArr = append(docMdArr, "####### 数据库定义SQL")
-		docMdArr = append(docMdArr, genTableSqlArea()...)
+		docMdArr = append(docMdArr, "####### DDL")
+		docMdArr = append(docMdArr, genTableSqlArea(tables[i].Ddl)...)
 		docMdArr = append(docMdArr, "")
 
 	}

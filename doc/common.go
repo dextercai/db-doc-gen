@@ -31,11 +31,11 @@ func genTableIdx(idxs []model.Index) []string {
 	return tableIdxMd
 }
 
-func genTableSqlArea() []string {
+func genTableSqlArea(sql model.TableCreateSql) []string {
 	var tableSQLMd []string
 	//tableSQLMd = append(tableSQLMd, "## 数据库定义SQL")
-	tableSQLMd = append(tableSQLMd, "```")
-	tableSQLMd = append(tableSQLMd, "// TODO：待填充数据库定义SQL")
+	tableSQLMd = append(tableSQLMd, "```mysql")
+	tableSQLMd = append(tableSQLMd, sql.SqlLine)
 	tableSQLMd = append(tableSQLMd, "```")
 	return tableSQLMd
 }
