@@ -3,7 +3,7 @@
 
 ## TODO 
 - [x] MySQL/MariaDB
-- [ ] 结构导出为SQL
+- [x] 结构导出为SQL
 
 ## HOW TO INSTALL
 ```shell
